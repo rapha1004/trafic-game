@@ -17,6 +17,10 @@ body{
     background-color: rgb(52, 52, 52);
 }
 
+.car{
+    z-index: 3;
+}
+
 #cr1{
     border: solid white 15px;
     border-bottom: none;
