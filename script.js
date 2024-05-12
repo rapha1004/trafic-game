@@ -54,28 +54,7 @@ function genRndCar() {
         
         car.addEventListener('click', (event) => {
             let currentCar = event.target
-            
-            if(currentCar.classList.contains('moov')){
-                currentCar.style.transition = "0.2s"
-                currentCar.classList.remove('moov')
-            }else{
-                currentCar.style.transition = "7s ease"
-                currentCar.classList.add('moov')
-                if (currentCar.classList.contains('1')){
-                    var moov = window.innerWidth + 200;
-                    currentCar.style.left = moov + "px";
-                }else if(currentCar.classList.contains('2')){
-                    var moov = window.innerHeight + 200;
-                    currentCar.style.top = "-" + moov + "px";
-                }else if(currentCar.classList.contains('3')){
-                    var moov = window.innerWidth + 200;
-                    currentCar.style.left = "-" + moov + "px";
-                }else{
-                    var moov = window.innerHeight + 200;
-                    currentCar.style.top = moov + "px";  
-                }
-            }
-            
+            moovcar(currentCar)
         });
         document.body.appendChild(car);
         carCount++; 
@@ -85,6 +64,40 @@ setInterval(() => {
     delCar()
     document.querySelector('h3').innerText = carCount
 }, 100);
+
+let interval1;
+
+function moovcar(currentCar) {
+    if (currentCar.classList.contains('moov')) {
+        let = carSP = currentCar.classList
+        // if (carSP.contains === '1') {}
+        clearInterval(interval1);
+        currentCar.style.transition = "none";
+        let newTop = currentCar.getBoundingClientRect()
+        let newLeft = currentCar.getBoundingClientRect()
+        currentCar.style.left = newLeft.left
+        currentCar.style.top = newTop.top
+        currentCar.classList.remove('moov');
+    } else {
+        currentCar.style.transition = "10s ease";
+        currentCar.classList.add('moov');
+        if (currentCar.classList.contains('1')) {
+            interval1 = setInterval(() => {
+                currentCar.style.left = (parseFloat(currentCar.style.left) + 1) + "px";
+            }, 1);
+        } else if (currentCar.classList.contains('2')) {
+            var moov = window.innerHeight + 200;
+            currentCar.style.top = "-" + moov + "px";
+        } else if (currentCar.classList.contains('3')) {
+            var moov = window.innerWidth + 200;
+            currentCar.style.left = "-" + moov + "px";
+        } else {
+            var moov = window.innerHeight + 200;
+            currentCar.style.top = moov + "px";
+        }
+    }
+}
+
 
 function delCar() {
     let cars = document.querySelectorAll('.car');
