@@ -21,10 +21,10 @@ function genRndCar() {
         car.style.width = "70px";
         car.style.height = "40px";
         car.style.position = "absolute"
-        var colorList = ["#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff", "#00ffff"];
-        var randomIndex = Math.floor(Math.random() * colorList.length)
-        var randomColor = colorList[randomIndex]
-        car.style.background = randomColor
+        // var colorList = ["#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff", "#00ffff"];
+        // var randomIndex = Math.floor(Math.random() * colorList.length)
+        // var randomColor = "rgb(44, 172, 21)"
+        // car.style.background = randomColor
         let spawnIndex = Math.floor(Math.random() * spawnLocations.length); // Choix aléatoire d'un emplacement de spawn disponible
         const spawn = spawnLocations[spawnIndex];
         spawnLocations.splice(spawnIndex, 1);
@@ -51,7 +51,9 @@ function genRndCar() {
                 car.classList.add('4')
                 car.classList.add('N-S')
         }
-        
+        car.classList.add('state1')
+        changeCarState(car)
+
         car.addEventListener('click', (event) => {
             let currentCar = event.target
             moovcar(currentCar)
@@ -97,7 +99,27 @@ function moovcar(currentCar) {
         }
     }
 }
-
+function changeCarState(car) {
+    car.style.background = "rgb(44, 172, 21)"
+    setTimeout(() => {
+        car.classList.remove('state1')
+        car.classList.add('state2')
+        car.style.background = 'red'
+        if (car.classList.contains('state2')) {
+            car.classList.remove('state1')
+            car.classList.add('state2')
+            car.style.background = 'orange'
+            setTimeout(() => {
+                car.classList.remove('state2')
+                car.classList.add('state3')
+                car.style.background = 'red'
+                setTimeout(() => {
+                   moovcar(car)
+                }, 300);
+            }, 3000);
+        }
+    }, 5000);
+}
 
 function delCar() {
     let cars = document.querySelectorAll('.car');
