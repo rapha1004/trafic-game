@@ -100,25 +100,27 @@ function moovcar(currentCar) {
     }
 }
 function changeCarState(car) {
-    car.style.background = "rgb(44, 172, 21)"
-    setTimeout(() => {
-        car.classList.remove('state1')
-        car.classList.add('state2')
-        car.style.background = 'red'
-        if (car.classList.contains('state2')) {
+    if(!car.classList.contains('state2') || !car.classList.contains('state3')){
+        car.style.background = "rgb(44, 172, 21)"
+        setTimeout(() => {
             car.classList.remove('state1')
             car.classList.add('state2')
-            car.style.background = 'orange'
-            setTimeout(() => {
-                car.classList.remove('state2')
-                car.classList.add('state3')
-                car.style.background = 'red'
+            car.style.background = 'red'
+            if (car.classList.contains('state2')) {
+                car.classList.remove('state1')
+                car.classList.add('state2')
+                car.style.background = 'orange'
                 setTimeout(() => {
-                   moovcar(car)
-                }, 300);
-            }, 3000);
-        }
-    }, 5000);
+                    car.classList.remove('state2')
+                    car.classList.add('state3')
+                    car.style.background = 'red'
+                    setTimeout(() => {
+                       moovcar(car)
+                    }, 300);
+                }, 3000);
+            }
+        }, 5000);
+    }
 }
 
 function delCar() {
